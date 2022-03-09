@@ -45,7 +45,7 @@ def feedback(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            subject = f'[Mtllst] User {cd["name"]} send mail'
+            subject = f'[MTLLST] User {cd["name"]} send mail'
             message = render_to_string('core/email.html', {'data': cd})
             send_mail(subject, message, settings.EMAIL_HOST_USER,
                 [settings.EMAIL_HOST_USER])
@@ -54,5 +54,5 @@ def feedback(request):
             for field in form:
                 for error in field.errors:
                     messages.error(request, error)
-        return redirect('.')
-    return redirect('.')
+        return redirect('/')
+    return redirect('/')
