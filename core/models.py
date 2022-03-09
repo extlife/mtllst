@@ -19,6 +19,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('core:product', args=[self.slug])
 
+    def __str__(self):
+        return self.title
+
 class Item(models.Model):
     text = models.CharField(max_length=250, blank=True, null=True,
         verbose_name = 'Наименование')
@@ -45,3 +48,6 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Статью'
         verbose_name_plural = 'Статьи'
+
+    def __str__(self):
+        return self.title
