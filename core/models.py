@@ -38,8 +38,6 @@ class Post(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     cover = models.ImageField(upload_to='images', blank=True,
         verbose_name='Обложка')
-    video = models.TextField(blank=True)
-    as_cover = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('core:post', args=[self.slug])

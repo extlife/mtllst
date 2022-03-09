@@ -17,14 +17,9 @@
               <div class="news-inner__media">
                 <img src="{{ post.cover.url }}" alt="">
               </div>
-              {% elif not post.cover and not post.video %}
+              {% else %}
               <div class="news-inner__media">
                 <img src="{% static 'core/images/default.jpg' %}" alt="">
-              </div>
-              {% endif %}
-              {% if post.video %}
-              <div class="news-inner__media">
-                {{ post.video|safe }}
               </div>
               {% endif %}
             </div>
