@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+      <div class="container">
+        <section class="news-sec">
+          <h2>Новости</h2>
+          <div class="news">
+            {% for post in posts %}
+            <div class="news__item">
+              <div class="news__item-info-wrapper">
+                <div class="news__item-h">
+                  <a href="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                  </a>
+                </div>
+                <div class="news__item-text">
+                  {{ post.text|safe|truncatewords:50 }}
+                </div>
+                <div class="news__item-date">{{ post.added|date:'d b Y в H:i' }}</div>
+              </div>
+              <div class="news__item-media">
+                {% if post.video and post.as_cover %}
+                  {{ post.video|safe }}
+                {% elif post.cover %}
+                <img src="{{ post.cover.url }}" alt="">
+                {% else %}
+                <img src="{% static 'core/images/default.jpg' %}" alt="">
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+{% endblock %}

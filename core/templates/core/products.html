@@ -1,0 +1,31 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Продукция{% endblock %}
+
+{% block content %}
+      <div class="container">
+        <section class="production-sec">
+          <h2>Продукция</h2>
+          <div class="production-page">
+            <div class="production-page__row row">
+            {% for product in products %}
+              <a href="{{ product.get_absolute_url }}" class="production-page__card col">
+                <div class="production-page__card-img">
+                  {% if product.image %}
+                  <img src="{{ product.image.url }}" width="310" height="223" alt="{{ product.title }}">
+                  {% else %}
+                  <img src="{% static 'core/images/default.jpg' %}" width="310" height="223" alt="{{ product.title }}">
+                  {% endif %}
+                </div>
+                <div class="production-page__card-text">
+                  {{ product.title }}
+                </div>
+              </a>
+            {% endfor %}
+            </div>
+          </div>
+        </section>
+      </div>
+{% endblock %}

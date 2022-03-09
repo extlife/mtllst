@@ -1,0 +1,29 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+      <div class="container">
+        <section class="production-more-sec">
+          <h2>{{ product.title }}</h2>
+          <div class="production-inner">
+            <div class="uls">
+              <ul class="production-inner__list">
+                {% for item in product.items.all %}
+                <li class="production-inner__list-item">{{ item.text }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="production-inner__img">
+              {% if product.image %}
+              <img src="{{ product.image.url }}" width="310" height="223" alt="{{ product.title }}">
+              {% else %}
+              <img src="{% static 'core/images/default.jpg' %}" width="310" height="223" alt="{{ product.title }}">
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </div>
+{% endblock %}

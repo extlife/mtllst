@@ -1,0 +1,179 @@
+{% load core_tags %}
+{% load static %}
+{% feedback_form as form %}
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    <main>
+      {% if messages %}
+      {% for message in messages %}
+      <div>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% endif %}
+      <header class="header">
+        <div class="container">
+
+          <div class="header__top">
+            <div class="header__top-item">ООО «ЗАВОД МЕТАЛЛООСНАСТКИ»</div>
+            <div class="header__top-item"><span class="address">644085, г. Омск пр. Мира, д. 185, корп. 3</span></div>
+            <div class="header__top-item">
+              <div class="numbers">
+                <div class="numbers__item"><a href="tel:83812267489">8 3812 26 74 89</a></div>
+                <div class="numbers__item"><a href="tel:83812267669">8 3812 26 76 69</a></div>
+              </div>
+            </div>
+          </div>
+        
+          <div class="header__bottom">
+            <div class="header__bottom-item">
+              <button class="primary-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Оставить заказ
+              </button>
+            </div>
+            <div class="header__bottom-item">
+              <nav class="nav">
+                <ul class="menu">
+                  <li class="menu__item menu__item_active">
+                    <a href="{% url 'core:home' %}" class="menu__item-link">Главная</a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="{% url 'core:products' %}" class="menu__item-link">Продукция</a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="{% url 'core:news' %}" class="menu__item-link">Новости</a>
+                  </li>
+                  <li class="menu__item">
+                    <a href="{% url 'core:about' %}" class="menu__item-link">О нас</a>
+                  </li>
+                  <li class="menu__item">
+                    <a class="menu__item-link">Прочее
+                      <object type="image/svg+xml" data="{% static 'core/images/angle-arrow-down.svg' %}"></object>
+                      <div class="dropdown-fix"></div>
+                    </a>
+                    <div class="dropdown">
+                      <a href="{% url 'core:geo' %}">География поставок</a>
+                      <a href="{% url 'core:payment' %}">Оплата и доставка</a>
+                      <a href="{% url 'core:price' %}">Цены</a>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="burger">
+          <button class="burger__btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="burger__nav">
+            <ul>
+              <li><a href="{% url 'core:home' %}">Главная</a></li>
+              <li><a href="{% url 'core:products' %}">Продукция</a></li>
+              <li><a href="{% url 'core:news' %}">Новости</a></li>
+              <li><a href="{% url 'core:about' %}">О нас</a></li>
+              <li><a href="#">Прочее</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      {% block content %}{% endblock %}
+      <div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="order-modal">
+                <div class="order-inner">
+                  <div class="order-inner__h">ОСТАВИТЬ ЗАКАЗ</div>
+                  <a href="#" class="close"  data-bs-dismiss="modal"></a>
+                  <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
+                  <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="small-btn">Отправить</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="go-back">
+            <a href="#" class="go-back__text">
+              ВЕРНУТЬСЯ
+              <object type="image/svg+xml" data="{% static 'core/images/arrow-top.svg' %}"></object>
+            </a>
+          </div>
+          <div class="footer-info">
+            <ul class="footer-top__list">
+              <li class="footer-top__list-header">КОНТАКТЫ</li>
+              <li class="footer-top__list-item">
+                <object type="image/svg+xml" data="{% static 'core/images/point.svg' %}"></object>
+                644085 г. Омск,
+                <br>пр. Мира д. 185, корп. 3
+              </li>
+              <li class="footer-top__list-item">
+                <object type="image/svg+xml" data="{% static 'core/images/mail.svg' %}"></object>
+                metallist-2000@yandex.ru
+              </li>
+              <li class="footer-top__list-item">
+                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object>
+                8 (3812) 26-74-89
+              </li>
+              <li class="footer-top__list-item">
+                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object>
+                8 (3812) 26-76-69
+              </li>
+            </ul>
+            <ul class="footer-top__list">
+              <li class="footer-top__list-header">СОЦИАЛЬНЫЕ СЕТИ</li>
+              <li id="inst" class="footer-top__list-item">
+                <a href="https://www.instagram.com" target="_blank">Instagram</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom__wrapper">
+        <div class="container">
+          <div class="footer-bottom">
+            <div class="footer-bottom__item">ООО «Завод Металлооснастки» © {% now "Y" %}</div>
+            <div class="footer-bottom__item">
+              <a href="http://squozdigital.ru/" target="_blank">
+                Создание сайта - <span id="squoz">SQUOZ DIGITAL</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'core/js/app.min.js' %}"></script>
+  </body>
+</html>

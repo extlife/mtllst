@@ -1,0 +1,131 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load core_tags %}
+{% feedback_form as form %}
+
+
+{% block title %}ООО «ЗАВОД МЕТАЛЛООСНАСТКИ»{% endblock %}
+
+{% block content %}
+      <!-- banner -->
+      <div class="container">
+        <section class="banner">
+          <h6>Банер</h6>
+          <p class="banner__text">Качество, наработанное годами</p>
+        </section>
+      </div>
+      <!-- mom -->
+      <div class="container">
+        <section class="mom">
+          <h6>Описание</h6>
+          <div class="mom__item">
+            <p class="primary-text">
+              Предприятие имеет производственные площади, оснащенные грузоподъемным и
+              сварочным оборудованием, оборудованием для <span class="text-medium"> механической обработки
+              металла</span>, закрытые и открытые складские помещения с подъездными
+              путями железнодорожного транспорта.
+            </p>
+          </div>
+          <div class="mom__item">
+            <div class="mom__item-img"></div>
+          </div>
+        </section>
+      </div>
+      <!-- advantages -->
+      <div class="container">
+        <hr>
+        <section class="advantages">
+          <h2>Производство металлоформ для ЖБИ и металлоконструкций</h2>
+          <div class="advantages-inner">
+            <div class="advantages__item">
+              <div class="advantages__item-img"><img src="{% static 'core/images/img-1.png' %}" alt=""></div>
+              <div class="advantages__item-text">50 лет в отрасли</div>
+            </div>
+            <div class="advantages__item">
+              <div class="advantages__item-img"> <img src="{% static 'core/images/img-2.png' %}" alt=""></div>
+              <div class="advantages__item-text">8.5 тыс. м² производственные площади</div>
+            </div>
+            <div class="advantages__item">
+              <div class="advantages__item-img"> <img src="{% static 'core/images/img-3.png' %}" alt=""></div>
+              <div class="advantages__item-text">Контроль ОТК</div>
+            </div>
+            <div class="advantages__item">
+              <div class="advantages__item-img"> <img src="{% static 'core/images/img-4.png' %}" alt=""></div>
+              <div class="advantages__item-text">Гарантии производителя</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- about -->
+      <div class="container">
+        <hr>
+        <section class="about">
+          <h2>О заводе</h2>
+          <p class="primary-text">
+            Общество с ограниченной ответственностью «Завод Металлооснастки» образовано в
+            2000 году на базе завода Металлист, который ранее именовался Николаевским ремонтно-механическим
+            заводом и являлся одним из старейших предприятий в стройиндустрии.
+          </p>
+          <div class="blue-link">
+            <a class="link-text" href="{% url 'core:about' %}">Узнать больше</a>
+            <object type="image/svg+xml" data="{% static 'core/images/arrow-right.svg' %}"></object>
+          </div>
+        </section>
+      </div>
+      <!-- production -->
+      <div class="container">
+        <hr>
+        <section class="production">
+          <h2>Что мы изготавливаем?</h2>
+          <div class="production__item-wrapper">
+            {% for product in products %}
+            <a href="{{ product.get_absolute_url }}" class="production__item">
+              <div class="production__item-image">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                {% else %}
+                <img src="{% static 'core/images/default.jpg' %}" alt="{{ product.title }}">
+                {% endif %}
+              </div>
+              <div class="production__item-text">{{ product.title }}</div>
+            </a>
+            {% endfor %}
+          </div>
+          <div class="production__link">
+            <div class="blue-link">
+              <a class="link-text" href="{% url 'core:products' %}">Вся продукция</a>
+              <object type="image/svg+xml" data="{% static 'core/images/arrow-right.svg' %}"></object>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- order -->
+      <section class="order">
+        <h6>Оставить заказ</h6>
+        <div class="container">
+          <div class="order-inner">
+            <div class="order-inner__h">ОСТАВИТЬ ЗАКАЗ</div>
+            <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
+            <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
+              <div class="order-inner__form-inputs">
+                <label for="{{ form.name.id_for_label }}">{{ form.name.label }}
+                  {{ form.name }}
+                </label>
+                <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}
+                  {{ form.phone }}
+                </label>
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}
+                  {{ form.email }}
+                </label>
+              </div>
+              <label for="{{ form.text.id_for_label }}">{{ form.text.label }}
+                {{ form.text }}
+              </label>
+              <input type="hidden" name="next" value="{{ request.path }}">
+              {% csrf_token %}
+              <button class="small-btn">Отправить</button>
+            </form>
+          </div>
+        </div>
+      </section>
+{% endblock %}

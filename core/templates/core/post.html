@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+      <div class="container">
+        <section class="news-more-sec">
+          <h2>{{ post.title }}</h2>
+          <div class="news-more-sec__date">{{ post.added|date:'d b Y в H:i' }}</div>
+          <div class="news-inner">
+            <div class="news-inner__text">
+              {{ post.text|safe }}
+            </div>
+            <div class="news-inner__imgs">
+              {% if post.cover %}
+              <div class="news-inner__media">
+                <img src="{{ post.cover.url }}" alt="">
+              </div>
+              {% elif not post.cover and not post.video %}
+              <div class="news-inner__media">
+                <img src="{% static 'core/images/default.jpg' %}" alt="">
+              </div>
+              {% endif %}
+              {% if post.video %}
+              <div class="news-inner__media">
+                {{ post.video|safe }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </div>
+{% endblock %}
