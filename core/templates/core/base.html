@@ -13,7 +13,7 @@
   </head>
   <body>
     <main>
-      {% if messages %} 
+      {% if messages %}
       {% for message in messages %}
       <div>
         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -113,7 +113,7 @@
                   <a href="#" class="close" data-bs-dismiss="modal"></a>
                   <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
                   <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
-                    {{ form.as_p }} 
+                    {{ form.as_p }}
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button class="small-btn">Отправить</button>
