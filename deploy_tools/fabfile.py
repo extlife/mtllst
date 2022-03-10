@@ -59,16 +59,16 @@ def update_database(c, source_folder):
 
 def configure_nginx(c, source_folder):
     tools_folder = source_folder + '/deploy_tools'
-    c.sudo(f'cp {tools_folder}/nginx.template.conf /etc/nginx/sites-available/{c.host}')
+    c.sudo(f'cp -f {tools_folder}/nginx.template.conf /etc/nginx/sites-available/{c.host}')
     c.sudo(f'sed -i "s/SITENAME/{c.host}/g;s/USER/{c.user}/g" /etc/nginx/sites-available/{c.host}')
     c.sudo(f'ln -s -f /etc/nginx/sites-available/{c.host} /etc/nginx/sites-enabled/{c.host}')
     c.sudo('systemctl reload nginx')
 
 def configure_gunicorn(c, source_folder):
     tools_folder = source_folder + '/deploy_tools'
-    c.sudo(f'cp {tools_folder}/gunicorn-systemd.template.service'
+    c.sudo(f'cp -f {tools_folder}/gunicorn-systemd.template.service'
         + f' /etc/systemd/system/gunicorn-{c.host}.service')
-    c.sudo(f'sed -i "s/SITENAME/{c.host}/g;s/USER/{c.user}/g;s/PROJECT/{PROJECT}/g"'
+    c.sudo(f'sed -i "s/SITENAME/{c.host}/g;s/USERNAME/{c.user}/g;s/PROJECT/{PROJECT}/g"'
         + f' /etc/systemd/system/gunicorn-{c.host}.service')
     c.sudo('systemctl daemon-reload')
     c.sudo(f'systemctl enable gunicorn-{c.host}')
