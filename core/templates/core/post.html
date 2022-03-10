@@ -1,6 +1,5 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -15,13 +14,9 @@
             <div class="news-inner__imgs">
               {% if post.cover %}
               <div class="news-inner__media">
-                <img src="{{ post.cover.url }}" alt="">
+                <img src="{{ post.cover.url }}" alt="img">
               </div>
-              {% else %}
-              <div class="news-inner__media">
-                <img src="{% static 'core/images/default.jpg' %}" alt="">
-              </div>
-              {% endif %}
+            {% endif %}
             </div>
           </div>
         </section>

@@ -1,6 +1,5 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
 {% block title %}Новости{% endblock %}
 
 {% block content %}
@@ -17,15 +16,17 @@
                   </a>
                 </div>
                 <div class="news__item-text">
-                  {{ post.text|safe|truncatewords:50 }}
+                  {{ post.text|truncatewords_html:30|safe }}
                 </div>
-                <div class="news__item-date">{{ post.added|date:'d b Y в H:i' }}</div>
+                <div class="news__item-date">
+                  {{ post.added|date:'d b Y в H:i' }}
+                </div>
               </div>
               <div class="news__item-media">
                 {% if post.cover %}
-                <img src="{{ post.cover.url }}" alt="">
+                <img src="{{ post.cover.url }}" alt="img">
                 {% else %}
-                <img src="{% static 'core/images/default.jpg' %}" alt="">
+                <img src="{% static 'core/images/default.jpg' %}" alt="deaful img">
                 {% endif %}
               </div>
             </div>

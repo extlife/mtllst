@@ -3,7 +3,6 @@
 {% load core_tags %}
 {% feedback_form as form %}
 
-
 {% block title %}ООО «ЗАВОД МЕТАЛЛООСНАСТКИ»{% endblock %}
 
 {% block content %}
@@ -20,14 +19,18 @@
           <h6>Описание</h6>
           <div class="mom__item">
             <p class="primary-text">
-              Предприятие имеет производственные площади, оснащенные грузоподъемным и
-              сварочным оборудованием, оборудованием для <span class="text-medium"> механической обработки
-              металла</span>, закрытые и открытые складские помещения с подъездными
-              путями железнодорожного транспорта.
+              Предприятие имеет производственные площади, оснащенные грузоподъемным
+              и сварочным оборудованием, оборудованием для 
+              <span class="text-medium"> механической обработки металла</span>, 
+              закрытые и открытые складские помещения с подъездными путями железнодорожного транспорта.
             </p>
           </div>
           <div class="mom__item">
-            <div class="mom__item-img"></div>
+            <div class="mom__item-media">
+              <iframe src="https://www.youtube.com/embed/2Ima9QohipA?" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            </div>
           </div>
         </section>
       </div>
@@ -62,9 +65,9 @@
         <section class="about">
           <h2>О заводе</h2>
           <p class="primary-text">
-            Общество с ограниченной ответственностью «Завод Металлооснастки» образовано в
-            2000 году на базе завода Металлист, который ранее именовался Николаевским ремонтно-механическим
-            заводом и являлся одним из старейших предприятий в стройиндустрии.
+            Общество с ограниченной ответственностью «Завод Металлооснастки» образовано
+            в 2000 году на базе завода Металлист, который ранее именовался Николаевским
+            ремонтно-механическим заводом и являлся одним из старейших предприятий в стройиндустрии.
           </p>
           <div class="blue-link">
             <a class="link-text" href="{% url 'core:about' %}">Узнать больше</a>
@@ -78,18 +81,22 @@
         <section class="production">
           <h2>Что мы изготавливаем?</h2>
           <div class="production__item-wrapper">
-            {% for product in products %}
-            <a href="{{ product.get_absolute_url }}" class="production__item">
-              <div class="production__item-image">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.title }}">
-                {% else %}
-                <img src="{% static 'core/images/default.jpg' %}" alt="{{ product.title }}">
-                {% endif %}
+            <div class="row row-cols-1  row-cols-sm-2 row-cols-md-3">
+              {% for product in products %}
+              <div class="col">
+                <a href="{{ product.get_absolute_url }}" class="production__item">
+                  <div class="production__item-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                    {% else %}
+                    <img src="{% static 'core/images/default.jpg' %}" alt="{{ product.title }}">
+                    {% endif %}
+                  </div>
+                  <div class="production__item-text">{{ product.title }}</div>
+                </a>
               </div>
-              <div class="production__item-text">{{ product.title }}</div>
-            </a>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
           <div class="production__link">
             <div class="blue-link">
@@ -108,18 +115,18 @@
             <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
             <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
               <div class="order-inner__form-inputs">
-                <label for="{{ form.name.id_for_label }}">{{ form.name.label }}
-                  {{ form.name }}
+                <label for="{{ form.name.id_for_label }}">
+                  {{ form.name.label }}{{ form.name }}
                 </label>
-                <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}
-                  {{ form.phone }}
+                <label for="{{ form.phone.id_for_label }}">
+                  {{ form.phone.label }}{{ form.phone }}
                 </label>
-                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}
-                  {{ form.email }}
+                <label for="{{ form.email.id_for_label }}">
+                  {{ form.email.label }}{{ form.email }}
                 </label>
               </div>
-              <label for="{{ form.text.id_for_label }}">{{ form.text.label }}
-                {{ form.text }}
+              <label for="{{ form.text.id_for_label }}">
+                {{ form.text.label }}{{ form.text }}
               </label>
               <input type="hidden" name="next" value="{{ request.path }}">
               {% csrf_token %}

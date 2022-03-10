@@ -1,31 +1,30 @@
-{% load core_tags %}
 {% load static %}
+{% load core_tags %}
 {% feedback_form as form %}
 <!DOCTYPE html>
 <html lang="ru">
-
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <title>{% block title %}{% endblock %}</title>
+    <link type="image/x-icon" href=" {% static 'core/images/favicon-32x32.png' %}" rel="shortcut icon">
   </head>
-
   <body>
     <main>
-      {% if messages %}
+      {% if messages %} 
       {% for message in messages %}
       <div>
         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
         <div class="alert alert-danger alert-dismissible" role="alert">
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% else %}
         <div class="alert alert-success alert-dismissible" role="alert">
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endif %}
       </div>
@@ -33,7 +32,6 @@
       {% endif %}
       <header class="header">
         <div class="container">
-
           <div class="header__top">
             <div class="header__top-item">ООО «ЗАВОД МЕТАЛЛООСНАСТКИ»</div>
             <div class="header__top-item"><span class="address">644085, г. Омск пр. Мира, д. 185, корп. 3</span></div>
@@ -44,7 +42,6 @@
               </div>
             </div>
           </div>
-        
           <div class="header__bottom">
             <div class="header__bottom-item">
               <button class="primary-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -54,17 +51,21 @@
             <div class="header__bottom-item">
               <nav class="nav">
                 <ul class="menu">
-                  <li class="menu__item menu__item_active">
-                    <a href="{% url 'core:home' %}" class="menu__item-link">Главная</a>
+                  {% url 'core:home' as url %}
+                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                      <a href="{{ url }}" class="menu__item-link">Главная</a>
                   </li>
-                  <li class="menu__item">
-                    <a href="{% url 'core:products' %}" class="menu__item-link">Продукция</a>
+                  {% url 'core:products' as url %}
+                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                      <a href="{{ url }}" class="menu__item-link">Продукция</a>
                   </li>
-                  <li class="menu__item">
-                    <a href="{% url 'core:news' %}" class="menu__item-link">Новости</a>
+                  {% url 'core:news' as url %}
+                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                      <a href="{{ url }}" class="menu__item-link">Новости</a>
                   </li>
-                  <li class="menu__item">
-                    <a href="{% url 'core:about' %}" class="menu__item-link">О нас</a>
+                  {% url 'core:about' as url %}
+                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                      <a href="{{ url }}" class="menu__item-link">О нас</a>
                   </li>
                   <li class="menu__item">
                     <a class="menu__item-link">Прочее
@@ -72,9 +73,9 @@
                       <div class="dropdown-fix"></div>
                     </a>
                     <div class="dropdown">
-                      <a href="{% url 'core:geo' %}">География поставок</a>
-                      <a href="{% url 'core:payment' %}">Оплата и доставка</a>
-                      <a href="{% url 'core:price' %}">Цены</a>
+                        <a href="{% url 'core:geo' %}">География поставок</a>
+                        <a href="{% url 'core:payment' %}">Оплата и доставка</a>
+                        <a href="{% url 'core:price' %}">Цены</a>
                     </div>
                   </li>
                 </ul>
@@ -89,30 +90,30 @@
             <span></span>
           </button>
           <nav class="burger__nav">
-            <ul>
-              <li><a href="{% url 'core:home' %}">Главная</a></li>
-              <li><a href="{% url 'core:products' %}">Продукция</a></li>
-              <li><a href="{% url 'core:news' %}">Новости</a></li>
-              <li><a href="{% url 'core:about' %}">О нас</a></li>
-              <li><a href="{% url 'core:geo' %}">География поставок</a></li>
-              <li><a href="{% url 'core:payment' %}">Оплата и доставка</a></li>
-              <li><a href="{% url 'core:price' %}">Цены</a></li>
-            </ul>
+              <ul>
+                <li><a href="{% url 'core:home' %}">Главная</a></li>
+                <li><a href="{% url 'core:products' %}">Продукция</a></li>
+                <li><a href="{% url 'core:news' %}">Новости</a></li>
+                <li><a href="{% url 'core:about' %}">О нас</a></li>
+                <li><a href="{% url 'core:geo' %}">География поставок</a></li>
+                <li><a href="{% url 'core:payment' %}">Оплата и доставка</a></li>
+                <li><a href="{% url 'core:price' %}">Цены</a></li>
+              </ul>
           </nav>
         </div>
       </header>
       {% block content %}{% endblock %}
-      <div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
               <div class="order-modal">
                 <div class="order-inner">
                   <div class="order-inner__h">ОСТАВИТЬ ЗАКАЗ</div>
-                  <a href="#" class="close"  data-bs-dismiss="modal"></a>
+                  <a href="#" class="close" data-bs-dismiss="modal"></a>
                   <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
                   <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
-                    {{ form.as_p }}
+                    {{ form.as_p }} 
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <button class="small-btn">Отправить</button>
@@ -137,21 +138,17 @@
             <ul class="footer-top__list">
               <li class="footer-top__list-header">КОНТАКТЫ</li>
               <li class="footer-top__list-item">
-                <object type="image/svg+xml" data="{% static 'core/images/point.svg' %}"></object>
-                644085 г. Омск,
+                <object type="image/svg+xml" data="{% static 'core/images/point.svg' %}"></object> 644085 г. Омск,
                 <br>пр. Мира д. 185, корп. 3
               </li>
               <li class="footer-top__list-item">
-                <object type="image/svg+xml" data="{% static 'core/images/mail.svg' %}"></object>
-                metallist-2000@yandex.ru
+                <object type="image/svg+xml" data="{% static 'core/images/mail.svg' %}"></object> metallist-2000@yandex.ru
               </li>
               <li class="footer-top__list-item">
-                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object>
-                8 (3812) 26-74-89
+                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object> 8 (3812) 26-74-89
               </li>
               <li class="footer-top__list-item">
-                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object>
-                8 (3812) 26-76-69
+                <object type="image/svg+xml" data="{% static 'core/images/phone.svg' %}"></object> 8 (3812) 26-76-69
               </li>
             </ul>
             <ul class="footer-top__list">
@@ -169,7 +166,7 @@
             <div class="footer-bottom__item">ООО «Завод Металлооснастки» © {% now "Y" %}</div>
             <div class="footer-bottom__item">
               <a href="http://squozdigital.ru/" target="_blank">
-                Создание сайта - <span id="squoz">SQUOZ DIGITAL</span>
+                 Создание сайта - <span id="squoz">SQUOZ DIGITAL</span>
               </a>
             </div>
           </div>
