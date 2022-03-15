@@ -56,11 +56,11 @@
                       <a href="{{ url }}" class="menu__item-link">Главная</a>
                   </li>
                   {% url 'core:products' as url %}
-                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                  <li class="menu__item {% if url in request.path %}menu__item_active{% endif %}">
                       <a href="{{ url }}" class="menu__item-link">Продукция</a>
                   </li>
                   {% url 'core:news' as url %}
-                  <li class="menu__item {% if request.path == url %}menu__item_active{% endif %}">
+                  <li class="menu__item {% if url in request.path %}menu__item_active{% endif %}">
                       <a href="{{ url }}" class="menu__item-link">Новости</a>
                   </li>
                   {% url 'core:about' as url %}
