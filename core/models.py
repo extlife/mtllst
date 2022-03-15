@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 from tinymce.models import HTMLField
+from PIL import Image, ImageOps
+
 
 # Create your models here.
 
@@ -18,6 +21,12 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('core:product', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        image = Image.open(self.image)
+        image.save(self.image.path, quality=settings.IMG_QUALITY,
+            optimize=True)
 
     def __str__(self):
         return self.title
@@ -48,6 +57,12 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Статью'
         verbose_name_plural = 'Статьи'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        image = Image.open(self.cover)
+        image.save(self.cover.path, quality=settings.IMG_QUALITY,
+            optimize=True)
 
     def __str__(self):
         return self.title

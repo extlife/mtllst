@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['metall-2000.ru']
+ALLOWED_HOSTS = ['localhost', 'metall-2000.ru']
 
 
 # Application definition
@@ -146,3 +146,5 @@ EMAIL_PORT = 587
 # EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 # EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True
+
+IMG_QUALITY = 30
