@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'mtllst.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('PG_NAME'),
-        'USER': env('PG_USER'),
-        'PASSWORD': env('PG_PASS'),
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASS'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
