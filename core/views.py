@@ -10,7 +10,7 @@ from .forms import FeedbackForm
 
 def home(request):
     products = Product.objects.all()[:3]
-    return render(request, 'core/home.html', {'products': products}) 
+    return render(request, 'core/home.html', {'products': products})
 
 def products(request):
     products = Product.objects.all()
@@ -54,5 +54,5 @@ def feedback(request):
             for field in form:
                 for error in field.errors:
                     messages.error(request, error)
-        return redirect('/')
+        return redirect(request.POST.get('next'))
     return redirect('/')
