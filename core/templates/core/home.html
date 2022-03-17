@@ -20,8 +20,8 @@
           <div class="mom__item">
             <p class="primary-text">
               Предприятие имеет производственные площади, оснащенные грузоподъемным
-              и сварочным оборудованием, оборудованием для 
-              <span class="text-medium"> механической обработки металла</span>, 
+              и сварочным оборудованием, оборудованием для
+              <span class="text-medium"> механической обработки металла</span>,
               закрытые и открытые складские помещения с подъездными путями железнодорожного транспорта.
             </p>
           </div>
@@ -41,19 +41,27 @@
           <h2>Производство металлоформ для ЖБИ и металлоконструкций</h2>
           <div class="advantages-inner">
             <div class="advantages__item">
-              <div class="advantages__item-img"><img src="{% static 'core/images/img-1.png' %}" alt=""></div>
+              <div class="advantages__item-img">
+                <img src="{% static 'core/images/img-1.png' %}" width="176" height="176" alt="Опыт">
+              </div>
               <div class="advantages__item-text">50 лет в отрасли</div>
             </div>
             <div class="advantages__item">
-              <div class="advantages__item-img"> <img src="{% static 'core/images/img-2.png' %}" alt=""></div>
+              <div class="advantages__item-img">
+                <img src="{% static 'core/images/img-2.png' %}" width="176" height="176" alt="Маштаб">
+              </div>
               <div class="advantages__item-text">8.5 тыс. м² производственные площади</div>
             </div>
             <div class="advantages__item">
-              <div class="advantages__item-img"> <img src="{% static 'core/images/img-3.png' %}" alt=""></div>
+              <div class="advantages__item-img">
+                <img src="{% static 'core/images/img-3.png' %}" width="176" height="176" alt="Контроль">
+              </div>
               <div class="advantages__item-text">Контроль ОТК</div>
             </div>
             <div class="advantages__item">
-              <div class="advantages__item-img"> <img src="{% static 'core/images/img-4.png' %}" alt=""></div>
+              <div class="advantages__item-img">
+                <img src="{% static 'core/images/img-4.png' %}" width="176" height="176" alt="Гарантии">
+              </div>
               <div class="advantages__item-text">Гарантии производителя</div>
             </div>
           </div>
@@ -87,7 +95,7 @@
                 <a href="{{ product.get_absolute_url }}" class="production__item">
                   <div class="production__item-image">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                    <img src="{{ product.image.url }}" width="420" height="420" alt="{{ product.title }}">
                     {% else %}
                     <img src="{% static 'core/images/default.jpg' %}" alt="{{ product.title }}">
                     {% endif %}

@@ -24,9 +24,9 @@
               </div>
               <div class="news__item-media">
                 {% if post.cover %}
-                <img src="{{ post.cover.url }}" alt="img">
+                <img src="{{ post.cover.url }}" width="700" height="448" alt="{{ post.title }}">
                 {% else %}
-                <img src="{% static 'core/images/default.jpg' %}" alt="deaful img">
+                <img src="{% static 'core/images/default.jpg' %}" alt="{{ post.title }}">
                 {% endif %}
               </div>
             </div>
