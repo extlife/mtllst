@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     # installed app
     'tinymce',
+    'compressor'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
 # Media files
 MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../media'))
 MEDIA_URL = '/media/'
@@ -150,3 +157,18 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 # Optimize image settings
 IMG_QUALITY = 30
+
+# Compress CSS and JS
+COMPRESS_ENABLED = True
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_FILTERS = {
+    'css': [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+    ],
+    'js': [
+        'compressor.filters.jsmin.JSMinFilter',
+    ],
+}
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = True

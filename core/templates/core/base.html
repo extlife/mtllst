@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 {% load core_tags %}
 {% feedback_form as form %}
 <!DOCTYPE html>
@@ -7,7 +8,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    {% endcompress %}
     <title>{% block title %}{% endblock %}</title>
     <link type="image/x-icon" href=" {% static 'core/images/favicon-32x32.png' %}" rel="shortcut icon">
   </head>
@@ -173,6 +176,8 @@
         </div>
       </div>
     </footer>
+    {% compress js %}
     <script src="{% static 'core/js/app.min.js' %}"></script>
+    {% endcompress %}
   </body>
 </html>
