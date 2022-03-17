@@ -26,7 +26,7 @@
                 {% if post.cover %}
                 <img src="{{ post.cover.url }}" width="700" height="448" alt="{{ post.title }}">
                 {% else %}
-                <img src="{% static 'core/images/default.jpg' %}" alt="{{ post.title }}">
+                <img src="{% static 'core/images/default.jpg' %}" width="420" height="420" alt="{{ post.title }}">
                 {% endif %}
               </div>
             </div>

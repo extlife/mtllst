@@ -97,7 +97,7 @@
                     {% if product.image %}
                     <img src="{{ product.image.url }}" width="420" height="420" alt="{{ product.title }}">
                     {% else %}
-                    <img src="{% static 'core/images/default.jpg' %}" alt="{{ product.title }}">
+                    <img src="{% static 'core/images/default.jpg' %}" width="420" height="420" alt="{{ product.title }}">
                     {% endif %}
                   </div>
                   <div class="production__item-text">{{ product.title }}</div>
