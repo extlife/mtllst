@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
     {% compress css %}
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     {% endcompress %}
@@ -73,10 +74,10 @@
                       <a href="{{ url }}" class="menu__item-link">О нас</a>
                   </li>
                   <li class="menu__item">
-                    <a class="menu__item-link">Прочее
+                    <div class="menu__item-link">Прочее
                       <object type="image/svg+xml" data="{% static 'core/images/angle-arrow-down.svg' %}"></object>
                       <div class="dropdown-fix"></div>
-                    </a>
+                    </div>
                     <div class="dropdown">
                         <a href="{% url 'core:geo' %}">География поставок</a>
                         <a href="{% url 'core:payment' %}">Оплата и доставка</a>
