@@ -1,7 +1,9 @@
 {% load static %}
 {% load compress %}
 {% load core_tags %}
-{% feedback_form as form %}
+{% feedback_form 'modal' as modal_form %}
+{% feedback_form 'footer' as footer_form %}
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -116,10 +118,10 @@
                   <a href="#" class="close" data-bs-dismiss="modal"></a>
                   <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
                   <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
-                    {{ form.as_p }}
+                    {{ modal_form.as_p }}
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="small-btn">Отправить</button>
+                    <button class="small-btn" name="modal">Отправить</button>
                   </form>
                 </div>
               </div>

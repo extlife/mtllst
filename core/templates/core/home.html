@@ -1,7 +1,5 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% load core_tags %}
-{% feedback_form as form %}
 
 {% block title %}ООО «ЗАВОД МЕТАЛЛООСНАСТКИ»{% endblock %}
 
@@ -48,19 +46,19 @@
             </div>
             <div class="advantages__item">
               <div class="advantages__item-img">
-                <img src="{% static 'core/images/img-2.png' %}" width="176" height="176" alt="Маштаб">
+                <img src="{% static 'core/images/img-2.png' %}" width="184" height="176" alt="Маштаб">
               </div>
               <div class="advantages__item-text">8.5 тыс. м² производственные площади</div>
             </div>
             <div class="advantages__item">
               <div class="advantages__item-img">
-                <img src="{% static 'core/images/img-3.png' %}" width="176" height="176" alt="Контроль">
+                <img src="{% static 'core/images/img-3.png' %}" width="182" height="176" alt="Контроль">
               </div>
               <div class="advantages__item-text">Контроль ОТК</div>
             </div>
             <div class="advantages__item">
               <div class="advantages__item-img">
-                <img src="{% static 'core/images/img-4.png' %}" width="176" height="176" alt="Гарантии">
+                <img src="{% static 'core/images/img-4.png' %}" width="181" height="176" alt="Гарантии">
               </div>
               <div class="advantages__item-text">Гарантии производителя</div>
             </div>
@@ -123,22 +121,22 @@
             <p class="order-inner__text">Напишите нам информацию о заказе и мы с Вами свяжемся.</p>
             <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
               <div class="order-inner__form-inputs">
-                <label for="{{ form.name.id_for_label }}">
-                  {{ form.name.label }}{{ form.name }}
+                <label for="{{ footer_form.name.id_for_label }}">
+                  {{ footer_form.name.label }}{{ footer_form.name }}
                 </label>
-                <label for="{{ form.phone.id_for_label }}">
-                  {{ form.phone.label }}{{ form.phone }}
+                <label for="{{ footer_form.phone.id_for_label }}">
+                  {{ footer_form.phone.label }}{{ footer_form.phone }}
                 </label>
-                <label for="{{ form.email.id_for_label }}">
-                  {{ form.email.label }}{{ form.email }}
+                <label for="{{ footer_form.email.id_for_label }}">
+                  {{ footer_form.email.label }}{{ footer_form.email }}
                 </label>
               </div>
-              <label for="{{ form.text.id_for_label }}">
-                {{ form.text.label }}{{ form.text }}
+              <label for="{{ footer_form.text.id_for_label }}">
+                {{ footer_form.text.label }}{{ footer_form.text }}
               </label>
               <input type="hidden" name="next" value="{{ request.path }}">
               {% csrf_token %}
-              <button class="small-btn">Отправить</button>
+              <button class="small-btn" name="footer">Отправить</button>
             </form>
           </div>
         </div>

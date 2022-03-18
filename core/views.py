@@ -42,7 +42,10 @@ def price(request):
 
 def feedback(request):
     if request.method == 'POST':
-        form = FeedbackForm(request.POST)
+        if 'modal' in request.POST:
+            form = FeedbackForm(request.POST, prefix='modal')
+        else:
+            form = FeedbackForm(request.POST, prefix='footer')
         if form.is_valid():
             cd = form.cleaned_data
             subject = f'[MTLLST] User {cd["name"]} send mail'

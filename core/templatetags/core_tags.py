@@ -3,6 +3,6 @@ from ..forms import FeedbackForm
 
 register = template.Library()
 
-@register.simple_tag
-def feedback_form():
-    return FeedbackForm()
+@register.simple_tag(name='feedback_form')
+def feedback_form(prefix=''):
+    return FeedbackForm(prefix=prefix)
