@@ -40,6 +40,9 @@ class Item(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Изделия'
+    
+    def __str__(self):
+        return self.text
 
 class Post(models.Model):
     title = models.CharField(max_length=250, unique=True,
