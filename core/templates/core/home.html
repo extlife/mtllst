@@ -22,12 +22,9 @@
         <section class="mom">
           <h6>Описание</h6>
           <div class="mom__item">
-            <p class="primary-text">
-              Предприятие имеет производственные площади, оснащенные грузоподъемным
-              и сварочным оборудованием, оборудованием для
-              <span class="text-medium"> механической обработки металла</span>,
-              закрытые и открытые складские помещения с подъездными путями железнодорожного транспорта.
-            </p>
+            <p class="primary-text">                  
+           Сплоченная команда единомышленников «завода Металлооснастки» приветствует вас и приглашает к дальнейшему сотрудничеству.
+	    </p>
           </div>
   	   <!-- <div class="mom__item">
             <div class="mom__item-media">
@@ -54,7 +51,7 @@
               <div class="advantages__item-img">
                 <img src="{% static 'core/images/img-2.png' %}" width="184" height="176" alt="Маштаб">
               </div>
-              <div class="advantages__item-text">8.5 тыс. м² производственные площади</div>
+              <div class="advantages__item-text">8.5 тыс. м² производственных площадей</div>
             </div>
             <div class="advantages__item">
               <div class="advantages__item-img">
@@ -128,17 +125,17 @@
             <form action="{% url 'core:feedback' %}" method="POST" class="order-inner__form">
               <div class="order-inner__form-inputs">
                 <label for="{{ footer_form.name.id_for_label }}">
-                  {{ footer_form.name.label }}{{ footer_form.name }}
+                  {{ footer_form.name.label }}:{{ footer_form.name }}
                 </label>
                 <label for="{{ footer_form.phone.id_for_label }}">
-                  {{ footer_form.phone.label }}{{ footer_form.phone }}
+                  {{ footer_form.phone.label }}:{{ footer_form.phone }}
                 </label>
                 <label for="{{ footer_form.email.id_for_label }}">
-                  {{ footer_form.email.label }}{{ footer_form.email }}
+                  {{ footer_form.email.label }}:{{ footer_form.email }}
                 </label>
               </div>
               <label for="{{ footer_form.text.id_for_label }}">
-                {{ footer_form.text.label }}{{ footer_form.text }}
+                {{ footer_form.text.label }}:{{ footer_form.text }}
               </label>
               <input type="hidden" name="next" value="{{ request.path }}">
               {% csrf_token %}
